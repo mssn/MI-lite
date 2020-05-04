@@ -1,18 +1,13 @@
 package edu.purdue.cs.mssn.mi_lite;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +16,11 @@ import java.util.concurrent.TimeUnit;
 
 public class GlobalStore extends Application {
 
-    private Activity mainActivity;
+    private AppCompatActivity mainActivity;
     private NotificationManager manager;
     private TextView myTextView;
 
-    void Init(Activity activity) {
+    void Init(AppCompatActivity activity) {
         this.mainActivity = activity;
         myTextView = activity.findViewById(R.id.myTextView);
 

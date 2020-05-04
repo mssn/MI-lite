@@ -1,10 +1,6 @@
 package edu.purdue.cs.mssn.mi_lite;
 
 import android.Manifest;
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,28 +10,21 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.util.Log;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class ScrollingActivity extends AppCompatActivity {
 
@@ -44,7 +33,7 @@ public class ScrollingActivity extends AppCompatActivity {
     private ServiceConnection serviceConnectionLightDiagRevealer;
     private boolean isLightDiagRevealerServiceConnected = false;
     private LightDiagRevealerService mLightDiagRevealerService;
-    private Activity thisActivity;
+    private AppCompatActivity thisActivity;
     private Handler handler;
     private static final int MULTIPLE_PERMISSION_REQUEST = 19;
 
@@ -104,13 +93,22 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     private void askForPermissions() {
-        ActivityCompat.requestPermissions(thisActivity,
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.FOREGROUND_SERVICE
-                },
-                MULTIPLE_PERMISSION_REQUEST);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.FOREGROUND_SERVICE
+                    },
+                    MULTIPLE_PERMISSION_REQUEST);
+        } else {
+            ActivityCompat.requestPermissions(thisActivity,
+                    new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    },
+                    MULTIPLE_PERMISSION_REQUEST);
+        }
     }
 
     @Override

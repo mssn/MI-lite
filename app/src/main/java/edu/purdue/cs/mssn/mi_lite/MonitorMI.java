@@ -1,15 +1,16 @@
 package edu.purdue.cs.mssn.mi_lite;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 class MonitorMI {
     private GlobalStore gs;
     private monitor instance;
 
-    MonitorMI(final Activity activity) {
+    MonitorMI(final AppCompatActivity activity) {
         this.gs = (GlobalStore) activity.getApplication();
         instance = new monitor(activity);
     }
@@ -23,9 +24,9 @@ class MonitorMI {
     }
 
     private class monitor extends AsyncTask<Void, String, Integer> {
-        Activity activity;
+        AppCompatActivity activity;
 
-        monitor(Activity activity) {
+        monitor(AppCompatActivity activity) {
             this.activity = activity;
         }
 
