@@ -5,11 +5,13 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.telephony.TelephonyManager;
@@ -164,7 +166,10 @@ public class LightDiagRevealerService extends Service {
         GlobalStore.executeCommand(new String[]{"chmod", "a+x", file_DiagRevealer.getAbsolutePath()});
 
         try {
-            InputStream in = getResources().openRawResource(R.raw.mmlabv2);
+            // InputStream in = getResources().openRawResource(R.raw.mmlabv2);
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            String strConfig = sharedPref.getString(SettingsActivity.KEY_LEVEL, getString(R.string.default_option_level));
+            InputStream in = getResources().openRawResource(getResources().getIdentifier(strConfig, "raw", getPackageName()));
             FileOutputStream out= openFileOutput("Diag.cfg", MODE_PRIVATE);
             byte[] buff = new byte[1024];
             int read;
@@ -173,6 +178,7 @@ public class LightDiagRevealerService extends Service {
             }
             in.close();
             out.close();
+            gs.showMessage("Use Diag.cfg file:" + strConfig);
         } catch(IOException e) {
             e.printStackTrace();
         }

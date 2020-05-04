@@ -1,0 +1,25 @@
+<resources>
+    <!-- Reply Preference -->
+
+    <string-array name="level_entries">
+        <item>Smart</item>
+        <item>LTE Control Plane</item>
+        <item>LTE PHY</item>
+        <item>LTE Control/PHY</item>
+        <item>LTE Control/Data Plane</item>
+        <item>LTE Control/Data/PHY</item>
+        <item>LTE/3G Control Plane</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="level_values">
+        <item>mmlabv2</item>
+        <item>lte_control</item>
+        <item>lte_phy</item>
+        <item>lte_control_phy</item>
+        <item>lte_control_data</item>
+        <item>lte_control_data_phy</item>
+        <item>lte_3g_control</item>
+        <item>all</item>
+    </string-array>
+</resources>
