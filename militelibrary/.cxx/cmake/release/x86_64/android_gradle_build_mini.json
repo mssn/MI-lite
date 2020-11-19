@@ -1,0 +1,19 @@
+{
+  "buildFiles": [
+    "/home/moonsky219/Android/Sdk/ndk/20.0.5594570/build/cmake/android.toolchain.cmake",
+    "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/CMakeLists.txt",
+    "/home/moonsky219/Android/Sdk/ndk/20.0.5594570/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/home/moonsky219/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/release/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/home/moonsky219/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/release/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "dmcollector-Release-x86_64": {
+      "artifactName": "dmcollector",
+      "buildCommand": "/home/moonsky219/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/release/x86_64\" dmcollector",
+      "abi": "x86_64",
+      "output": "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/build/intermediates/cmake/release/obj/x86_64/libdmcollector.so"
+    }
+  }
+}

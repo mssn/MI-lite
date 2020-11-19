@@ -13,7 +13,7 @@
     </string-array>
 
     <string-array name="level_values">
-        <item>mmlabv2</item>
+        <item>suggested</item>
         <item>lte_control</item>
         <item>lte_phy</item>
         <item>lte_control_phy</item>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.purdue.cs.mssn.militelibrary">
+
+    <application>
+        <service
+            android:name=".MILiteService"
+            android:enabled="true"
+            android:exported="false" />
+    </application>
+
+</manifest>

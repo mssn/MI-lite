@@ -1,11 +1,8 @@
 package edu.purdue.cs.mssn.mi_lite;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,7 +13,6 @@ import android.util.Log;
 
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,16 +22,17 @@ import androidx.core.app.ActivityCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import edu.purdue.cs.mssn.militelibrary.MILiteService;
+
 public class ScrollingActivity extends AppCompatActivity {
 
-    private MonitorMI monitorMI;
-    private boolean startMonitorMI;
     private ServiceConnection serviceConnectionLightDiagRevealer;
     private boolean isLightDiagRevealerServiceConnected = false;
-    private LightDiagRevealerService mLightDiagRevealerService;
+    private MILiteService mLightDiagRevealerService;
     private AppCompatActivity thisActivity;
     private Handler handler;
     private static final int MULTIPLE_PERMISSION_REQUEST = 19;
+    GlobalStore gs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +41,6 @@ public class ScrollingActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("MIlite.ItemDetailActivity.MIdead");
-
         handler = new Handler();
 
         Switch switch1 = findViewById(R.id.switch1);
@@ -54,7 +48,6 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    registerReceiver(brTaskCommand, intentFilter);
                     handler.post(runMobileInsight);
                 } else {
                     handler.post(stopTask);
@@ -63,7 +56,7 @@ public class ScrollingActivity extends AppCompatActivity {
         });
 
         thisActivity = this;
-        GlobalStore gs = (GlobalStore) getApplication();
+        gs = (GlobalStore) getApplication();
         gs.Init(thisActivity);
 
         askForPermissions();
@@ -135,20 +128,9 @@ public class ScrollingActivity extends AppCompatActivity {
         return true;
     }
 
-    private BroadcastReceiver brTaskCommand = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if ("MIlite.ItemDetailActivity.MIdead".equals(action)) {
-                runMobileInsight.run();
-            }
-        }
-    };
-
     private Runnable stopTask = new Runnable() {
         @Override
         public void run() {
-            GlobalStore.executeCommand(new String[]{"su", "-c", "svc wifi enable"});
             killMI();
         }
     };
@@ -157,50 +139,40 @@ public class ScrollingActivity extends AppCompatActivity {
         @Override
         public void run() {
             killMI();
-            GlobalStore.executeCommand(new String[]{"su", "-c", "svc wifi disable"});
-            monitorMI = new MonitorMI(thisActivity);
-            monitorMI.start();
-            startMonitorMI = true;
             serviceConnectionLightDiagRevealer = new ServiceConnection() {
                 @Override
                 public void onServiceConnected(ComponentName name, IBinder service) {
                     Log.i(getString(R.string.app_name), "LightDiagRevealer Service Connected.");
-                    mLightDiagRevealerService = ((LightDiagRevealerService.LocalBinder) service).getService();
+                    mLightDiagRevealerService = ((MILiteService.LocalBinder) service).getService();
                     isLightDiagRevealerServiceConnected = true;
+                    mLightDiagRevealerService.setDiagConfigOption(MILiteService.DiagConfig.suggested);
+                    gs.showMessage("Output Directory: " + mLightDiagRevealerService.getOutputPath());
+                    gs.showMessage("Used Diag Config: " + mLightDiagRevealerService.getDiagConfigOption().name());
                     mLightDiagRevealerService.start();
-                    if (mLightDiagRevealerService.mTask == null){
-                        TextView myTextView = findViewById(R.id.myTextView);
-                        myTextView.append("LightDiagRevealerService start failed.\n");
-                    }else{
-                        TextView myTextView = findViewById(R.id.myTextView);
-                        myTextView.append("LightDiagRevealerService connected.\n");
-                    }
+                    gs.showMessage("MI-Lite Service Connected");
                 }
 
                 @Override
                 public void onServiceDisconnected(ComponentName name) {
-                    Log.i(getString(R.string.app_name), "LightDiagRevealer Service Crashed.");
+                    gs.showMessage("MI-Lite Service Crashed.");
                     isLightDiagRevealerServiceConnected = false;
                 }
             };
 
-            bindService(new Intent(thisActivity, LightDiagRevealerService.class),
+            bindService(new Intent(thisActivity, MILiteService.class),
                     serviceConnectionLightDiagRevealer, BIND_AUTO_CREATE);
         }
     };
 
     private void killMI() {
-        if (monitorMI != null && startMonitorMI) {
-            monitorMI.stop();
-            startMonitorMI = false;
-        }
         if (isLightDiagRevealerServiceConnected) {
             try {
                 isLightDiagRevealerServiceConnected = false;
                 mLightDiagRevealerService.stop();
                 unbindService(serviceConnectionLightDiagRevealer);
+                gs.showMessage("MI-Lite Service Stopped.");
             } catch (java.lang.IllegalArgumentException e) {
-                Log.i(getString(R.string.app_name), "LightDiagRevealerService is null");
+                gs.showMessage("MI-Lite Service stop failed");
             }
         }
     }

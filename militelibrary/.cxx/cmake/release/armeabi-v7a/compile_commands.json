@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/release/armeabi-v7a",
+  "command": "/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi19 --gcc-toolchain=/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Ddmcollector_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -march=armv7-a -mthumb -Wa,--noexecstack -Wformat -Werror=format-security   -Oz -DNDEBUG  -fPIC   -o CMakeFiles/dmcollector.dir/src/main/cpp/dmcollector.cpp.o -c /home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/src/main/cpp/dmcollector.cpp",
+  "file": "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/src/main/cpp/dmcollector.cpp"
+}
+]

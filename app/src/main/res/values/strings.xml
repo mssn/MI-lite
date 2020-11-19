@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MI-lite</string>
+    <string name="app_name">MI-Lite-DEMO</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -8,5 +8,5 @@
 
     <!-- General Preferences -->
     <string name="level_title">Log collecting level</string>
-    <string name="default_option_level">mmlabv2</string>
+    <string name="default_option_level">suggested</string>
 </resources>

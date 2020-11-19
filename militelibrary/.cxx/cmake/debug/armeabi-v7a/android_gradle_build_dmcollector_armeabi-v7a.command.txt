@@ -1,0 +1,7 @@
+Executable : /home/moonsky219/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/debug/armeabi-v7a
+dmcollector
+jvmArgs : 
+

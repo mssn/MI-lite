@@ -21,11 +21,6 @@
             android:label="@string/title_activity_settings"
             android:parentActivityName=".ScrollingActivity" />
 
-        <service
-            android:name=".LightDiagRevealerService"
-            android:enabled="true"
-            android:exported="false" />
-
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/app_name"
