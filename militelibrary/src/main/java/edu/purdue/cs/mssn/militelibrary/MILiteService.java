@@ -88,7 +88,7 @@ public class MILiteService extends Service {
 
     /**
      setOutputPath: set the output path in external storage directory
-     @param path should start with '\', will be appended directly after Environment.getExternalStorageDirectory().getAbsolutePath()
+     @param path should start with '/', will be appended directly after Environment.getExternalStorageDirectory().getAbsolutePath()
      @return false if cannot find/create such a directory
      */
     public boolean setOutputPath(String path) {
