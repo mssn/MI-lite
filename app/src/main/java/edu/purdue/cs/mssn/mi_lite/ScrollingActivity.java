@@ -148,6 +148,7 @@ public class ScrollingActivity extends AppCompatActivity {
                     mLightDiagRevealerService.setDiagConfigOption(MILiteService.DiagConfig.suggested);
                     gs.showMessage("Output Directory: " + mLightDiagRevealerService.getOutputPath());
                     gs.showMessage("Used Diag Config: " + mLightDiagRevealerService.getDiagConfigOption().name());
+                    gs.showMessage("Diag File Cut Size (MB): " + mLightDiagRevealerService.getCutSize());
                     mLightDiagRevealerService.start();
                     gs.showMessage("MI-Lite Service Connected");
                 }

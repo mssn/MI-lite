@@ -46,6 +46,7 @@ public class MILiteService extends Service {
     File file_customized_DiagConfig;
     File file_FIFO;
     File directory_output_logs;
+    int iCutSize;
     Process processDiagRevealer;
     Task_Read_PIPE mTask;
     DiagConfig diagConfigOption;
@@ -82,6 +83,7 @@ public class MILiteService extends Service {
         super.onCreate();
         this.diagConfigOption = DiagConfig.suggested;
         this.outputPath = "/MI-lite/log";   // default output location
+        this.iCutSize = 25; // default cut size in MB.
     }
 
     /**
@@ -104,6 +106,18 @@ public class MILiteService extends Service {
         return this.outputPath;
     }
 
+    public boolean setCutSize(int cutSize) {
+        if (cutSize < 1) {
+            return false;
+        }
+        this.iCutSize = cutSize;
+        return true;
+    }
+
+    public int getCutSize() {
+        return this.iCutSize;
+    }
+
     public boolean setDiagConfigOption(DiagConfig config) {
         if (config == DiagConfig.customized) {
             return false;
@@ -114,6 +128,10 @@ public class MILiteService extends Service {
 
     public boolean setDiagConfigOption(DiagConfig config, File configFile) {
         if (config != DiagConfig.customized) {
+            return false;
+        }
+        if (!configFile.exists() || !configFile.isFile()) {
+            Log.i("MI-Lite", "Provided config file is not file or doesn't exist.");
             return false;
         }
         this.diagConfigOption = DiagConfig.customized;
