@@ -1,3 +1,0 @@
-/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/rebuild_cache.dir
-/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/edit_cache.dir
-/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/debug/armeabi-v7a/CMakeFiles/dmcollector.dir

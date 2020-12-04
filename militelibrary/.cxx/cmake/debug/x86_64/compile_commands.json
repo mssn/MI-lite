@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/.cxx/cmake/debug/x86_64",
-  "command": "/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=x86_64-none-linux-android21 --gcc-toolchain=/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/moonsky219/Android/Sdk/ndk/20.0.5594570/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Ddmcollector_EXPORTS  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -fno-addrsig -Wa,--noexecstack -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/dmcollector.dir/src/main/cpp/dmcollector.cpp.o -c /home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/src/main/cpp/dmcollector.cpp",
-  "file": "/home/moonsky219/AndroidStudioProjects/MIlite/militelibrary/src/main/cpp/dmcollector.cpp"
-}
-]
